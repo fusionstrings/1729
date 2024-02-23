@@ -7,7 +7,8 @@
     "typescript": "^5.3.3"
   },
   "scripts": {
-    "test": "npx playwright test"
+    "test": "npx playwright test",
+    "update-screenshots": "npx playwright test --update-snapshots"
   },
   "type": "module"
 }
