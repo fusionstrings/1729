@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "npx playwright test",
+    "test-ui": "npx playwright test --ui",
     "update-screenshots": "npx playwright test --update-snapshots"
   },
   "type": "module"
