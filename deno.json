@@ -11,7 +11,7 @@
         "#home-dom": "./source/components/home-dom.ts",
         "#request-handler": "./source/request-handler.ts",
         "#on-listen": "./source/on-listen.ts",
-        "#browser-importmap": "./importmaps/importmap.json"
+        "#browser-importmap": "./source/importmaps/importmap.json"
     },
     "tasks": {
         "start": "deno run --allow-net --allow-read --allow-env --allow-write server.ts",
