@@ -1,6 +1,6 @@
 {
   "name": "@fusionstrings/1729",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "imports": {
     "#home-dom": "./source/components/home-dom.ts"
   },
