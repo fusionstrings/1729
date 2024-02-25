@@ -1,6 +1,5 @@
 import { serveFile } from "#http/file_server";
 import browserImportmap from '#browser-importmap' assert { type: 'json' };
-
 type BrowserAssets = keyof typeof browserImportmap['imports'];
 
 async function requestHandler(request: Request) {
