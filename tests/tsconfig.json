@@ -103,9 +103,8 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
   "files": [
-    // "source/constants.ts",
-    "source/main.tsx",
-    // "source/types.ts",
-    // "source/@oddjs/odd.ts"
+    "source/constants.ts",
+    "source/main.ts",
+    "source/types.ts"
   ]
 }

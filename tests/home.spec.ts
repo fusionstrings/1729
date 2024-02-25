@@ -7,11 +7,15 @@ test('Visual Comparision @HOME', async ({ page }: { page: Page }) => {
 
 test('No 404 errors and no console errors', async ({ page }: { page: Page }) => {
 
-    // // Check for 404 errors
-    const requests: Request[] = [];
+    const notFoundRequests: Request[] = [];
 
-    page.on('request', (request: Request) => {
-        requests.push(request);
+    page.on('request', async (request: Request) => {
+
+        const response = await request.response();
+        const status = response?.status();
+        if(status === 404){
+            notFoundRequests.push(request);
+        }
     });
 
     // Check for failed errors
@@ -39,12 +43,6 @@ test('No 404 errors and no console errors', async ({ page }: { page: Page }) => 
     await page.goto('/');
 
     await page.waitForLoadState();
-    const notFoundRequests = requests.filter(async request => {
-        const response = await request.response();
-        const status = response?.status();
-        const is404 = status === 404
-        return is404;
-    });
     
     expect(exceptions.length).toBe(0, 'No exceptions should be present');
     

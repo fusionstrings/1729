@@ -1,6 +1,9 @@
 {
   "name": "@fusionstrings/1729",
   "version": "0.1.0",
+  "imports": {
+    "#home-dom": "./source/components/home-dom.ts"
+  },
   "devDependencies": {
     "@playwright/test": "^1.41.2",
     "@types/node": "^20.11.20",
@@ -9,7 +12,8 @@
   "scripts": {
     "test": "npx playwright test",
     "test-ui": "npx playwright test --ui",
-    "update-screenshots": "npx playwright test --update-snapshots"
+    "update-screenshots": "npx playwright test --update-snapshots",
+    "build": "npx esbuild ./source/main.tsx --bundle --sourcemap --outdir=www/scripts --target=chrome120 --format=esm"
   },
   "type": "module"
 }

@@ -1,4 +1,5 @@
 import { parseHTML } from "linkedom";
+
 async function requestHandlerHTTP() {
   try {
     const templateURL = new URL("../templates/page.html", import.meta.url)
@@ -19,8 +20,19 @@ async function requestHandlerHTTP() {
     const element1729 = document.createElement("fusionstrings-1729");
     element1729.innerHTML = `<h1>1729</h1>`;
 
-    document.querySelector('main').appendChild(element1729);
+    const mainElement = document.querySelector("main");
 
+    if (mainElement) {
+      mainElement.appendChild(element1729);
+    }
+
+    const importmapElement = document.querySelector('script[type="importmap"]');
+    
+    if(importmapElement){
+      const importmap = await Deno.readTextFile("./www/browser.importmap");
+      importmapElement.innerHTML = importmap;
+    }
+    
     return new Response(document.toString(), {
       headers: { "content-type": "text/html" },
     });

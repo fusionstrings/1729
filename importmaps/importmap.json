@@ -1,0 +1,9 @@
+{
+    "imports": {
+        "#css/reset.css": "./www/css/reset.css",
+        "#css/style.css": "./www/css/style.css",
+        "#scripts/main.js": "./www/scripts/main.js",
+        "#scripts/main.js.map": "./www/scripts/main.js.map",
+        "#favicon.ico": "./www/images/favicon.ico"
+    }
+}

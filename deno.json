@@ -8,10 +8,20 @@
         "#emit": "https://deno.land/x/emit@0.38.1/mod.ts",
         "#home": "./source/home.tsx",
         "#request-handler": "./source/request-handler.ts",
-        "#on-listen": "./source/on-listen.ts"
+        "#on-listen": "./source/on-listen.ts",
+        "#browser-importmap": "./importmaps/importmap.json",
+        "@fusionstrings/1729": "./source/components/home-dom.ts"
     },
     "tasks": {
         "start": "deno run --allow-net --allow-read --allow-env --allow-write server.ts",
         "dev": "deno run --allow-net --allow-read --allow-env --allow-write --watch server.ts"
+    },
+    "compilerOptions": {
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "dom.asynciterable",
+            "deno.ns"
+        ]
     }
 }

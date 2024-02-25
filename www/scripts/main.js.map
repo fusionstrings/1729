@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../source/components/home-dom.ts", "../../source/main.tsx"],
+  "sourcesContent": ["class HomeDOM extends HTMLElement {\n    connectedCallback() {\n        console.log(\"fusionstrings-1729 connected \uD83E\uDD73\");\n    }\n}\n\nexport { HomeDOM }\n", "import { HomeDOM } from \"#home-dom\";\nfunction main() {\n  customElements.define(\n    \"fusionstrings-1729\",\n    HomeDOM,\n  );\n}\n\nexport { main };\n"],
+  "mappings": ";AAAA,IAAM,UAAN,cAAsB,YAAY;AAAA,EAC9B,oBAAoB;AAChB,YAAQ,IAAI,wCAAiC;AAAA,EACjD;AACJ;;;ACHA,SAAS,OAAO;AACd,iBAAe;AAAA,IACb;AAAA,IACA;AAAA,EACF;AACF;",
+  "names": []
+}

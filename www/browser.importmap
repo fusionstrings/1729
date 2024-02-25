@@ -1,0 +1,5 @@
+{
+    "imports": {
+        "@fusionstrings/1729": "./scripts/main.js"
+    }
+}
