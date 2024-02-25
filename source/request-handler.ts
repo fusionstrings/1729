@@ -1,5 +1,5 @@
 import { serveFile } from "#http/file_server";
-import browserImportmap from '#browser-importmap' assert { type: 'json' };
+import browserImportmap from './importmaps/importmap.json' assert { type: 'json' };
 
 type BrowserAssets = keyof typeof browserImportmap['imports'];
 

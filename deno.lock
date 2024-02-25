@@ -2,7 +2,8 @@
   "version": "3",
   "packages": {
     "specifiers": {
-      "npm:linkedom": "npm:linkedom@0.16.8"
+      "npm:linkedom": "npm:linkedom@0.16.8",
+      "npm:xstate": "npm:xstate@5.4.1"
     },
     "npm": {
       "boolbase@1.0.0": {
@@ -89,6 +90,10 @@
       "uhyphen@0.2.0": {
         "integrity": "sha512-qz3o9CHXmJJPGBdqzab7qAYuW8kQGKNEuoHFYrBwV6hWIMcpAmxDLXojcHfFr9US1Pe6zUswEIJIbLI610fuqA==",
         "dependencies": {}
+      },
+      "xstate@5.4.1": {
+        "integrity": "sha512-1DDT047hsTCSgm3BwLyb4sXQDmTdbLutc4ni0MLACgd2yX6vij35pnNNf1F4U6kQ8njx6NxQ6wpLjlh1lqs0NQ==",
+        "dependencies": {}
       }
     }
   },
@@ -141,7 +146,8 @@
   },
   "workspace": {
     "dependencies": [
-      "npm:linkedom"
+      "npm:linkedom",
+      "npm:xstate"
     ],
     "packageJson": {
       "dependencies": [
