@@ -7,7 +7,6 @@
         "#fs": "https://deno.land/std@0.217.0/fs/mod.ts",
         "#emit": "https://deno.land/x/emit@0.38.1/mod.ts",
         "#home": "./source/home.tsx",
-        "#resource": "./source/resource.ts",
         "#request-handler": "./source/request-handler.ts",
         "#on-listen": "./source/on-listen.ts",
         "#browser-importmap": "./importmaps/importmap.json",
