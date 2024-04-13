@@ -6,10 +6,9 @@ async function requestHandler(request: Request) {
     try {
         const { pathname } = new URL(request.url);
 
-        const pathnameHandlerID = pathname.replace('/', '#');
-        const pathnameHandler  = pathnameHandlerID === '#' ? "#home" : pathnameHandlerID;
-        
-        if(pathnameHandler in browserImportmap.imports){
+        const pathnameHandler = pathname === '/' ? "#home" : pathname.replace('/', '#');
+
+        if (pathnameHandler in browserImportmap.imports) {
             return serveFile(request, browserImportmap.imports[pathnameHandler as BrowserAssets])
         }
 
@@ -17,11 +16,10 @@ async function requestHandler(request: Request) {
         return requestHandlerHTTP(request);
     } catch (error) {
         console.error(error.message || error.toString());
-        
-        const templateURL = new URL('../www/404.html', import.meta.url).toString();
-        const notFound = await fetch(templateURL);
-        
-        return new Response(notFound.body, { status: 404 });
+
+        const html = await Deno.readTextFile("./source/templates/404.html");
+
+        return new Response(html, { status: 404, headers: { "content-type": "text/html" } });
     }
 }
 

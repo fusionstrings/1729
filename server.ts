@@ -1,14 +1,22 @@
-import { requestHandler } from "#request-handler";
-import { onListen } from "#on-listen";
+import { createActor } from 'xstate';
+import { signal, effect } from "@webreflection/signal";
+import { machine } from '#web-server-machine';
 
-const PORT  =  Deno.env.get('PORT');
+const server = signal(undefined);
 
-const serverOptions: Deno.ServeOptions = {
-    onListen,
-    port: PORT ? parseInt(PORT, 10) : 1729
-}
+effect(() => {
+    console.info('server: ', server.value)
+});
+
+
 
 if (import.meta?.main) {
-    Deno.serve(serverOptions, requestHandler);
+    const actor = createActor(machine);
+    actor.subscribe((snapshot) => {
+        console.log('Value:', snapshot.value);
+    });
+
+    actor.start();
+    actor.send({ type: 'start' });
 }
 

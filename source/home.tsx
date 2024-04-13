@@ -2,10 +2,12 @@ import { parseHTML } from "linkedom";
 
 async function requestHandlerHTTP() {
   try {
-    const templateURL = new URL("../templates/page.html", import.meta.url)
-      .toString();
-    const template = await fetch(templateURL);
-    const html = await template.text();
+    // const templateURL = new URL("../templates/page.html", import.meta.url)
+    //   .toString();
+    // const template = await fetch(templateURL);
+    // const html = await template.text();
+
+    const html = await Deno.readTextFile("./source/templates/page.html");
     const { document, customElements, HTMLElement } = parseHTML(html);
 
     customElements.define(
@@ -27,12 +29,12 @@ async function requestHandlerHTTP() {
     }
 
     const importmapElement = document.querySelector('script[type="importmap"]');
-    
-    if(importmapElement){
+
+    if (importmapElement) {
       const importmap = await Deno.readTextFile("./www/browser.importmap");
       importmapElement.innerHTML = importmap;
     }
-    
+
     return new Response(document.toString(), {
       headers: { "content-type": "text/html" },
     });

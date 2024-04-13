@@ -1,16 +1,18 @@
 {
     "imports": {
+        "@webreflection/signal": "npm:@webreflection/signal",
         "linkedom": "npm:linkedom",
         "xstate": "npm:xstate",
-        "#http/server": "https://deno.land/std@0.217.0/http/server.ts",
-        "#http/file_server": "https://deno.land/std@0.217.0/http/file_server.ts",
-        "#path": "https://deno.land/std@0.217.0/path/mod.ts",
-        "#fs": "https://deno.land/std@0.217.0/fs/mod.ts",
-        "#emit": "https://deno.land/x/emit@0.38.1/mod.ts",
+        "#http/server": "https://deno.land/std@0.221.0/http/server.ts",
+        "#http/file_server": "https://deno.land/std@0.221.0/http/file_server.ts",
+        "#path": "https://deno.land/std@0.221.0/path/mod.ts",
+        "#fs": "https://deno.land/std@0.221.0/fs/mod.ts",
+        "#emit": "https://deno.land/x/emit@0.38.2/mod.ts",
         "#home": "./source/home.tsx",
         "#home-dom": "./source/components/home-dom.ts",
         "#request-handler": "./source/request-handler.ts",
         "#on-listen": "./source/on-listen.ts",
+        "#web-server-machine": "./source/machines/web-server.ts",
         "#browser-importmap": "./source/importmaps/importmap.json"
     },
     "tasks": {
