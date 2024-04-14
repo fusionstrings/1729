@@ -13,6 +13,7 @@
         "#request-handler": "./source/request-handler.ts",
         "#on-listen": "./source/on-listen.ts",
         "#web-server-machine": "./source/machines/web-server.ts",
+        "#request-handler-machine": "./source/machines/request-handler.ts",
         "#browser-importmap": "./source/importmaps/importmap.json"
     },
     "tasks": {
