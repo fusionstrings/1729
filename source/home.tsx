@@ -2,10 +2,6 @@ import { parseHTML } from "linkedom";
 
 async function requestHandlerHTTP() {
   try {
-    // const templateURL = new URL("../templates/page.html", import.meta.url)
-    //   .toString();
-    // const template = await fetch(templateURL);
-    // const html = await template.text();
 
     const html = await Deno.readTextFile("./source/templates/page.html");
     const { document, customElements, HTMLElement } = parseHTML(html);
@@ -34,10 +30,12 @@ async function requestHandlerHTTP() {
       const importmap = await Deno.readTextFile("./www/browser.importmap");
       importmapElement.innerHTML = importmap;
     }
-
-    return new Response(document.toString(), {
+    
+    return {
+      body: document.toString(),
       headers: { "content-type": "text/html" },
-    });
+      status: 200
+    }
   } catch (error) {
     console.error(error.message || error.toString());
   }

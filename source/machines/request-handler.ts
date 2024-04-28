@@ -4,7 +4,7 @@ import { parseHTML } from "linkedom";
 export const machine = setup({
   types: {
     context: {} as { HOME: string },
-    events: {} as { type: "/" },
+    events: {} as { type: "/" } | { type: "/404" },
   },
   actions: {
     "HOME.success": assign({
@@ -17,11 +17,20 @@ export const machine = setup({
         return event.error.message
       }
     }),
+    "NOT_FOUND.success": assign({
+      NOT_FOUND: ({ context, event }) => {
+        return event.output;
+      }
+    }),
+    "NOT_FOUND.failed": assign({
+      NOT_FOUND: ({ context, event }) => {
+        return event.error.message
+      }
+    }),
   },
   actors: {
     "HOME.requestHandler": fromPromise(async () => {
       try {
-
         const html = await Deno.readTextFile("./source/templates/page.html");
         const { document, customElements, HTMLElement } = parseHTML(html);
 
@@ -55,10 +64,18 @@ export const machine = setup({
         throw new Error('Something went wrong');
       }
     }),
+    "NOT_FOUND.requestHandler": fromPromise(async () => {
+      const html = await Deno.readTextFile("./source/templates/page.html");
+      return html;
+    }),
   },
   schemas: {
     events: {
       "/": {
+        type: "object",
+        properties: {},
+      },
+      "/404": {
         type: "object",
         properties: {},
       },
@@ -81,34 +98,62 @@ export const machine = setup({
         "/": {
           target: "HOME",
         },
+        "/404": {
+          target: "NOT_FOUND",
+        },
       },
     },
     HOME: {
       invoke: {
         input: {},
         onDone: {
-          target: "SUCCESS",
+          target: "HOME_SUCCESS",
         },
         onError: {
-          target: "FAILED",
+          target: "HOME_FAILED",
         },
         src: "HOME.requestHandler",
       },
     },
-    SUCCESS: {
+    NOT_FOUND: {
+      invoke: {
+        input: {},
+        onDone: {
+          target: "NOT_FOUND_SUCCESS",
+        },
+        onError: {
+          target: "NOT_FOUND_FAILED",
+        },
+        src: "NOT_FOUND.requestHandler",
+      },
+    },
+    HOME_SUCCESS: {
       type: "final",
       entry: {
         type: "HOME.success",
       },
     },
-    FAILED: {
+    HOME_FAILED: {
       type: "final",
       entry: {
         type: "HOME.failed",
       },
     },
+    NOT_FOUND_SUCCESS: {
+      type: "final",
+      entry: {
+        type: "NOT_FOUND.success",
+      },
+    },
+    NOT_FOUND_FAILED: {
+      type: "final",
+      entry: {
+        type: "NOT_FOUND.failed",
+      },
+    },
   },
   output: ({ context }) => ({
-    '/': context.HOME
+    '/': context.HOME,
+    '/404': context.NOT_FOUND
   }),
 });

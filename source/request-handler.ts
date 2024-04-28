@@ -4,11 +4,25 @@ import { machine } from "#request-handler-machine";
 // import browserImportmap from '#browser-importmap' assert { type: 'json' };
 // type BrowserAssets = keyof typeof browserImportmap['imports'];
 
+async function errorResponse(error: Error) {
+    console.error(error.message || error.toString());
+
+    const html = await Deno.readTextFile("./source/templates/404.html");
+
+    return new Response(html, { status: 404, headers: { "content-type": "text/html" } });
+}
 async function requestHandler(request: Request) {
     try {
         const { pathname } = new URL(request.url);
 
         const actor = createActor(machine);
+
+        actor.subscribe({
+            error: (error: Error) => {
+                console.error(error);
+                return errorResponse(error)
+            }
+        });
 
         actor.start();
 
@@ -16,8 +30,10 @@ async function requestHandler(request: Request) {
 
         if (currentState.can({ type: pathname })) {
             actor.send({ type: pathname });
+        } else {
+            return errorResponse(new Error(`impossible state, resource ${pathname} not found.`))
         }
-        
+
         const output = await toPromise(actor);
         // const pathnameHandler = pathname === '/' ? "#home" : pathname.replace('/', '#');
 
@@ -49,11 +65,7 @@ async function requestHandler(request: Request) {
         //const html = await Deno.readTextFile("./source/templates/404.html");
         return new Response(output[pathname], { headers: { "content-type": "text/html" } });
     } catch (error) {
-        console.error(error.message || error.toString());
-
-        const html = await Deno.readTextFile("./source/templates/404.html");
-
-        return new Response(html, { status: 404, headers: { "content-type": "text/html" } });
+        return errorResponse(error)
     }
 }
 
