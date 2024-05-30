@@ -1,22 +1,18 @@
 import { setup, fromPromise, assign } from "xstate";
+import type { EventFromLogic } from 'xstate';
 import { parseHTML } from "linkedom";
 
-export const machine = setup({
+type response = { body: string; headers: { "content-type": string; }; status: number; }
+const machine = setup({
   types: {
-    context: {} as { HOME: string },
+    context: {} as {
+      NOT_FOUND: { body: string; headers: { "content-type": string; }; status: number; };
+      HOME: { body: string; headers: { "content-type": string; }; status: number; }
+    },
     events: {} as { type: "/" } | { type: "/404" },
+    output: {} as { '/': response } | { '/404': response }
   },
   actions: {
-    "HOME.success": assign({
-      HOME: ({ context, event }) => {
-        return event.output;
-      }
-    }),
-    "HOME.failed": assign({
-      HOME: ({ context, event }) => {
-        return event.error.message
-      }
-    }),
     "NOT_FOUND.success": assign({
       NOT_FOUND: ({ context, event }) => {
         return event.output;
@@ -58,7 +54,11 @@ export const machine = setup({
           const importmap = await Deno.readTextFile("./www/browser.importmap");
           importmapElement.innerHTML = importmap;
         }
-        return document.toString()
+        return {
+          body: document.toString(),
+          headers: { "content-type": "text/html" },
+          status: 200
+        }
       } catch (error) {
         console.error(error)
         throw new Error('Something went wrong');
@@ -66,7 +66,11 @@ export const machine = setup({
     }),
     "NOT_FOUND.requestHandler": fromPromise(async () => {
       const html = await Deno.readTextFile("./source/templates/page.html");
-      return html;
+      return {
+        body: html,
+        headers: { "content-type": "text/html" },
+        status: 404
+      }
     }),
   },
   schemas: {
@@ -88,7 +92,8 @@ export const machine = setup({
   },
 }).createMachine({
   context: {
-    HOME: "",
+    HOME: { body: '', headers: { "content-type": "text/html" }, status: 200 },
+    NOT_FOUND: { body: '', headers: { "content-type": "text/html" }, status: 404 }
   },
   id: "request-handler",
   initial: "IDLE",
@@ -108,9 +113,15 @@ export const machine = setup({
         input: {},
         onDone: {
           target: "HOME_SUCCESS",
+          actions: assign({
+            HOME: ({ event }) => event.output,
+          }),
         },
         onError: {
           target: "HOME_FAILED",
+          actions: assign({
+            HOME: ({ event }) => event.error.message,
+          }),
         },
         src: "HOME.requestHandler",
       },
@@ -128,16 +139,10 @@ export const machine = setup({
       },
     },
     HOME_SUCCESS: {
-      type: "final",
-      entry: {
-        type: "HOME.success",
-      },
+      type: "final"
     },
     HOME_FAILED: {
-      type: "final",
-      entry: {
-        type: "HOME.failed",
-      },
+      type: "final"
     },
     NOT_FOUND_SUCCESS: {
       type: "final",
@@ -157,3 +162,8 @@ export const machine = setup({
     '/404': context.NOT_FOUND
   }),
 });
+
+type MachineEvent = EventFromLogic<typeof machine>;
+
+export { machine }
+export type { MachineEvent }

@@ -2,13 +2,19 @@
   "version": "3",
   "packages": {
     "specifiers": {
-      "npm:@webreflection/signal": "npm:@webreflection/signal@2.0.0",
-      "npm:linkedom": "npm:linkedom@0.16.8",
-      "npm:xstate": "npm:xstate@5.4.1"
+      "npm:@types/node": "npm:@types/node@18.16.19",
+      "npm:linkedom@0.18.0": "npm:linkedom@0.18.0",
+      "npm:react-redux": "npm:react-redux@9.1.2_react@18.3.1",
+      "npm:xstate": "npm:xstate@5.13.0",
+      "npm:xstate@5.13.0": "npm:xstate@5.13.0"
     },
     "npm": {
-      "@webreflection/signal@2.0.0": {
-        "integrity": "sha512-qtReCZZOK2x6d4ObGg4VfiNQOpPxcVZ2VGx0Yevlw0fTJ5PJsK3cDN/SXEI+equTfkNcDgtEIh37eIVj0oaqJw==",
+      "@types/node@18.16.19": {
+        "integrity": "sha512-IXl7o+R9iti9eBW4Wg2hx1xQDig183jj7YLn8F7udNceyfkbn1ZxmzZXuak20gR40D7pIkIY1kYGx5VIGbaHKA==",
+        "dependencies": {}
+      },
+      "@types/use-sync-external-store@0.0.3": {
+        "integrity": "sha512-EwmlvuaxPNej9+T4v5AuBPJa2x2UOJVdjCtDHgcDqitUeOtjnJKJ+apYjVcAoBEMjKW1VVFGZLUb5+qqa09XFA==",
         "dependencies": {}
       },
       "boolbase@1.0.0": {
@@ -76,8 +82,12 @@
           "entities": "entities@4.5.0"
         }
       },
-      "linkedom@0.16.8": {
-        "integrity": "sha512-+HtHVHBb3yZKlP9pgcJdi1AIG9tsAuo+Qtlz+79cCTsxgQwDzajsZjYvpp+DEckCK/zoGVhzkADniYZQ57KcFQ==",
+      "js-tokens@4.0.0": {
+        "integrity": "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==",
+        "dependencies": {}
+      },
+      "linkedom@0.18.0": {
+        "integrity": "sha512-Xtu+w437ENHrgggnSHssua47vYXX/a/MzNdo+AR3UuWoOAxGZNwDSvjRPnPbVRFoygT990HS+7BDVBE1MK6FLQ==",
         "dependencies": {
           "css-select": "css-select@5.1.0",
           "cssom": "cssom@0.5.0",
@@ -86,18 +96,44 @@
           "uhyphen": "uhyphen@0.2.0"
         }
       },
+      "loose-envify@1.4.0": {
+        "integrity": "sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==",
+        "dependencies": {
+          "js-tokens": "js-tokens@4.0.0"
+        }
+      },
       "nth-check@2.1.1": {
         "integrity": "sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==",
         "dependencies": {
           "boolbase": "boolbase@1.0.0"
         }
       },
+      "react-redux@9.1.2_react@18.3.1": {
+        "integrity": "sha512-0OA4dhM1W48l3uzmv6B7TXPCGmokUU4p1M44DGN2/D9a1FjVPukVjER1PcPX97jIg6aUeLq1XJo1IpfbgULn0w==",
+        "dependencies": {
+          "@types/use-sync-external-store": "@types/use-sync-external-store@0.0.3",
+          "react": "react@18.3.1",
+          "use-sync-external-store": "use-sync-external-store@1.2.2_react@18.3.1"
+        }
+      },
+      "react@18.3.1": {
+        "integrity": "sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==",
+        "dependencies": {
+          "loose-envify": "loose-envify@1.4.0"
+        }
+      },
       "uhyphen@0.2.0": {
         "integrity": "sha512-qz3o9CHXmJJPGBdqzab7qAYuW8kQGKNEuoHFYrBwV6hWIMcpAmxDLXojcHfFr9US1Pe6zUswEIJIbLI610fuqA==",
         "dependencies": {}
       },
-      "xstate@5.4.1": {
-        "integrity": "sha512-1DDT047hsTCSgm3BwLyb4sXQDmTdbLutc4ni0MLACgd2yX6vij35pnNNf1F4U6kQ8njx6NxQ6wpLjlh1lqs0NQ==",
+      "use-sync-external-store@1.2.2_react@18.3.1": {
+        "integrity": "sha512-PElTlVMwpblvbNqQ82d2n6RjStvdSoNe9FG28kNfz3WiXilJm4DdNkEzRhCZuIDwY8U08WVihhGR5iRqAwfDiw==",
+        "dependencies": {
+          "react": "react@18.3.1"
+        }
+      },
+      "xstate@5.13.0": {
+        "integrity": "sha512-Z0om784N5u8sAzUvQJBa32jiTCIGGF/2ZsmKkerQEqeeUktAeOMK20FIHFUMywC4GcAkNksSvaeX7lwoRNXPEQ==",
         "dependencies": {}
       }
     }
@@ -194,15 +230,15 @@
   },
   "workspace": {
     "dependencies": [
-      "npm:@webreflection/signal",
-      "npm:linkedom",
-      "npm:xstate"
+      "npm:@webreflection/signal@2.1.2",
+      "npm:linkedom@0.18.0",
+      "npm:xstate@5.13.0"
     ],
     "packageJson": {
       "dependencies": [
-        "npm:@playwright/test@^1.42.1",
-        "npm:@types/node@^20.11.30",
-        "npm:typescript@^5.4.3"
+        "npm:@playwright/test@^1.44.1",
+        "npm:@types/node@^20.12.12",
+        "npm:typescript@^5.4.5"
       ]
     }
   }

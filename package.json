@@ -5,9 +5,9 @@
     "#home-dom": "./source/components/home-dom.ts"
   },
   "devDependencies": {
-    "@playwright/test": "^1.42.1",
-    "@types/node": "^20.11.30",
-    "typescript": "^5.4.3"
+    "@playwright/test": "^1.44.1",
+    "@types/node": "^20.12.12",
+    "typescript": "^5.4.5"
   },
   "scripts": {
     "test": "npx playwright test",
@@ -15,5 +15,6 @@
     "update-screenshots": "npx playwright test --update-snapshots",
     "build": "npx esbuild ./source/main.tsx --bundle --sourcemap --outdir=www/scripts --target=chrome120 --format=esm"
   },
-  "type": "module"
+  "type": "module",
+  "packageManager": "pnpm@9.1.4+sha256.30a1801ac4e723779efed13a21f4c39f9eb6c9fbb4ced101bce06b422593d7c9"
 }

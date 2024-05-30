@@ -1,8 +1,11 @@
 import { createActor, toPromise } from 'xstate';
 //import { serveFile } from "#http/file_server";
 import { machine } from "#request-handler-machine";
+import type { MachineEvent } from "#request-handler-machine";
 // import browserImportmap from '#browser-importmap' assert { type: 'json' };
 // type BrowserAssets = keyof typeof browserImportmap['imports'];
+
+
 
 async function errorResponse(error: Error) {
     console.error(error.message || error.toString());
@@ -11,27 +14,30 @@ async function errorResponse(error: Error) {
 
     return new Response(html, { status: 404, headers: { "content-type": "text/html" } });
 }
+
 async function requestHandler(request: Request) {
     try {
         const { pathname } = new URL(request.url);
-
+        let key = pathname;
         const actor = createActor(machine);
 
-        actor.subscribe({
-            error: (error: Error) => {
-                console.error(error);
-                return errorResponse(error)
-            }
-        });
+        // actor.subscribe({
+        //     error: (error: Error) => {
+        //         console.error(error);
+        //         return errorResponse(error)
+        //     }
+        // });
 
         actor.start();
 
         const currentState = actor.getSnapshot()
 
-        if (currentState.can({ type: pathname })) {
-            actor.send({ type: pathname });
+        if (currentState.can({ type: pathname as MachineEvent['type'] })) {
+            actor.send({ type: key as MachineEvent['type']  });
         } else {
-            return errorResponse(new Error(`impossible state, resource ${pathname} not found.`))
+            key = '/404'
+            actor.send({ type: key as MachineEvent['type'] });
+            //return errorResponse(new Error(`impossible state, resource ${pathname} not found.`))
         }
 
         const output = await toPromise(actor);
@@ -63,7 +69,7 @@ async function requestHandler(request: Request) {
         // }
 
         //const html = await Deno.readTextFile("./source/templates/404.html");
-        return new Response(output[pathname], { headers: { "content-type": "text/html" } });
+        return new Response(output[key]?.body, { status: output[key]?.status, headers: output[key]?.headers });
     } catch (error) {
         return errorResponse(error)
     }
