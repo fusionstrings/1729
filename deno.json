@@ -1,28 +1,43 @@
 {
-    "imports": {
-        "linkedom": "npm:linkedom",
-        "xstate": "npm:xstate",
-        "#http/server": "https://deno.land/std@0.217.0/http/server.ts",
-        "#http/file_server": "https://deno.land/std@0.217.0/http/file_server.ts",
-        "#path": "https://deno.land/std@0.217.0/path/mod.ts",
-        "#fs": "https://deno.land/std@0.217.0/fs/mod.ts",
-        "#emit": "https://deno.land/x/emit@0.38.1/mod.ts",
-        "#home": "./source/home.tsx",
-        "#home-dom": "./source/components/home-dom.ts",
-        "#request-handler": "./source/request-handler.ts",
-        "#on-listen": "./source/on-listen.ts",
-        "#browser-importmap": "./source/importmaps/importmap.json"
-    },
-    "tasks": {
-        "start": "deno run --allow-net --allow-read --allow-env --allow-write server.ts",
-        "dev": "deno run --allow-net --allow-read --allow-env --allow-write --watch server.ts"
-    },
-    "compilerOptions": {
-        "lib": [
-            "dom",
-            "dom.iterable",
-            "dom.asynciterable",
-            "deno.ns"
-        ]
-    }
+  "name": "@fusionstrings/1729",
+  "version": "1.0.0",
+  "exports": {
+    "./source/request-handler.ts": "./source/request-handler.ts",
+    "./source/on-listen.ts": "./source/on-listen.ts",
+    "./source/main.tsx": "./source/main.tsx",
+    "./source/home.tsx": "./source/home.tsx",
+    "./source/components/home-dom.ts": "./source/components/home-dom.ts",
+    "./tests/home.spec.ts": "./tests/home.spec.ts",
+    "./www/scripts/main.d.ts": "./www/scripts/main.d.ts",
+    "./www/scripts/main.js": "./www/scripts/main.js",
+    "./playwright.config.ts": "./playwright.config.ts",
+    "./server.ts": "./server.ts",
+    "./source/importmaps/importmap.json": "./source/importmaps/importmap.json",
+    "./tests/tsconfig.json": "./tests/tsconfig.json",
+    "./deno.json": "./deno.json",
+    "./package-lock.json": "./package-lock.json",
+    "./package.json": "./package.json",
+    "./tsconfig.json": "./tsconfig.json"
+  },
+  "imports": {
+    "linkedom": "npm:linkedom",
+    "#http/file_server": "jsr:@std/http@0.224.4/file-server",
+    "#home": "./source/home.tsx",
+    "#home-dom": "./source/components/home-dom.ts",
+    "#request-handler": "./source/request-handler.ts",
+    "#on-listen": "./source/on-listen.ts",
+    "#browser-importmap": "./source/importmaps/importmap.json"
+  },
+  "tasks": {
+    "start": "deno run --allow-net --allow-read --allow-env --allow-write server.ts",
+    "dev": "deno run --allow-net --allow-read --allow-env --allow-write --watch server.ts"
+  },
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "dom.asynciterable",
+      "deno.ns"
+    ]
+  }
 }
