@@ -2,7 +2,7 @@ import { serveFile } from "#http/file_server";
 import browserImportmap from '#browser-importmap' with { type: 'json' };
 type BrowserAssets = keyof typeof browserImportmap['imports'];
 
-async function requestHandler(request: Request) {
+async function requestHandler(request: Request): Promise<Response> {
     try {
         const { pathname } = new URL(request.url);
 
