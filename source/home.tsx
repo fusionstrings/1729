@@ -2,7 +2,7 @@ import { parseHTML } from "linkedom";
 
 async function requestHandlerHTTP() {
   try {
-    const templateURL = new URL("../templates/page.html", import.meta.url)
+    const templateURL = new URL("./templates/page.html", import.meta.url)
       .toString();
     const template = await fetch(templateURL);
     const html = await template.text();
