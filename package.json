@@ -1,19 +1,25 @@
 {
   "name": "@fusionstrings/1729",
   "version": "0.2.0",
+  "exports": {
+    ".": {
+      "types": "./www/scripts/main.d.ts",
+      "import": "./www/scripts/main.js"
+    }
+  },
   "imports": {
     "#home-dom": "./source/components/home-dom.ts"
   },
   "devDependencies": {
-    "@playwright/test": "^1.41.2",
-    "@types/node": "^20.11.20",
-    "typescript": "^5.3.3"
+    "@playwright/test": "^1.44.1",
+    "@types/node": "^20.14.2",
+    "typescript": "^5.4.5"
   },
   "scripts": {
     "test": "npx playwright test",
     "test-ui": "npx playwright test --ui",
     "update-screenshots": "npx playwright test --update-snapshots",
-    "build": "npx esbuild ./source/main.tsx --bundle --sourcemap --outdir=www/scripts --target=chrome120 --format=esm"
+    "build": "npx pkgroll --src source --dist www/scripts --sourcemap"
   },
   "type": "module"
 }
