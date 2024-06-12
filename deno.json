@@ -2,6 +2,7 @@
   "name": "@fusionstrings/1729",
   "version": "1.0.0",
   "exports": {
+    ".": "./server.ts",
     "./request-handler": "./source/request-handler.ts",
     "./on-listen": "./source/on-listen.ts",
     "./server": "./server.ts"
@@ -9,7 +10,7 @@
   "imports": {
     "linkedom": "npm:linkedom",
     "#http/file_server": "jsr:@std/http@0.224.4/file-server",
-    "#home": "./source/home.tsx",
+    "#home": "./source/home.ts",
     "#home-dom": "./source/components/home-dom.ts",
     "#request-handler": "./source/request-handler.ts",
     "#on-listen": "./source/on-listen.ts",
